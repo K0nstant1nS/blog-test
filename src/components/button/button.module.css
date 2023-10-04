@@ -1,0 +1,12 @@
+.button{
+  padding: 14px 24px 12px;
+  border: 2px solid var(--black-color-default);
+  border-radius: 6rem;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: opacity .5s;
+}
+
+.button:hover{
+  opacity: .5;
+}

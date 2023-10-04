@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 81.4%;
+  gap: 32px;
+}
+
+.header{
+  font-size: 6rem;
+  font-weight: bold;
+  color: var(--black-color-default)
+}
+
+.colums{
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.description{
+  font-size: 2.4rem;
+  color: var(--black-color-default)
+}

@@ -1,0 +1,16 @@
+.set{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+}
+
+.image{
+  width: 3.2rem;
+  height: 3.2rem;
+  cursor: pointer;
+  transition: opacity .5s
+}
+
+.image:hover{
+  opacity: .5;
+}
