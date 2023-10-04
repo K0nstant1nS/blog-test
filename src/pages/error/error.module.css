@@ -1,0 +1,17 @@
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 20px;
+  background: rgba(255, 255, 255, 1);
+  font-size: 2rem;
+  border-radius: 20px;
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+.message{
+  align-self: center;
+}
+
+

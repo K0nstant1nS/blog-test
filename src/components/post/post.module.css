@@ -3,12 +3,19 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  border: 1px solid #F4F4F4;
   border-radius: 1.2rem;
   overflow: hidden;
+  box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.23);
+}
+
+.image{
+  min-width: 200px;
 }
 
 .title{
   font-size: 2.8rem;
+  padding: 0 16px 0 16px;
 }
 
 .bottom{
@@ -18,7 +25,24 @@
   padding: 0 16px 32px;
 }
 
+.bottom-big{
+  justify-content: flex-end;
+}
+
 .reaction{
   display: flex;
   flex-direction: row;
+  gap: 24px;
+}
+
+.header{
+  padding: 0 16px 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.body{
+  font-size: 2.4rem;
+  padding: 8px 16px;
 }

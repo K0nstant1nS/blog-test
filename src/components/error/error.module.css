@@ -1,0 +1,13 @@
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-items: center;
+  align-content: center;
+  font-size: 2rem;
+}
+
+.image{
+  height: 48rem;
+  width: 50rem;
+}

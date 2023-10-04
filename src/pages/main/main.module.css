@@ -7,6 +7,7 @@
 }
 
 .header{
+  padding-top: 64px;
   font-size: 6rem;
   font-weight: bold;
   color: var(--black-color-default)
@@ -15,12 +16,14 @@
 .colums{
   display: flex;
   flex-direction: row;
-  gap: 24px;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .column{
   display: flex;
   flex-direction: column;
+  width: 49%;
   gap: 24px;
 }
 
