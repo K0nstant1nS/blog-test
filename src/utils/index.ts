@@ -3,3 +3,7 @@ export const getRandom: (min:number, max: number)=>string = (min, max) => {
 }
 
 export const getPostsSelector = (store:any) => store.posts
+
+export const configureQuery = (string: string) => {
+  return string.replaceAll(' ', '+')
+}

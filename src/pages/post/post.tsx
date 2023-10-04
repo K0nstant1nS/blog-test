@@ -16,7 +16,6 @@ function Post() {
   const { id } = useParams();
   const { data } = useSelector(getPostsSelector);
   const post = data.find((item: TPost) => {
-    console.log(id, item.id)
     return item.id == id
   })
 
@@ -29,7 +28,6 @@ function Post() {
   }
 
   const imgSrc = `https://placehold.co/600x400?text=${post.title}`
-  console.log(post)
 
   const toggleDislike = () => {
     dispatch({

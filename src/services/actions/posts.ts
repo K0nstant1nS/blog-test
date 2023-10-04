@@ -27,6 +27,22 @@ export const getPosts:AppThunk<void> = ()=>{
   }
 }
 
+export const getPostsByQuery:AppThunk<void> = (query: string)=>{
+  return (dispatch: AppDispatch) => {
+    Api.getPosts(query).then(data=>{
+      dispatch({
+        type: GET_POSTS,
+        payload: data.map((item:any) => {
+          return {...item, likes: getRandom(0, 50), dislikes: getRandom(0, 50), reaction: null}
+        })
+      })
+    })
+    .catch(() => {
+      dispatch({ type: SET_POSTS_ONERROR })
+    })
+  }
+}
+
 export interface IGetPosts {
   type: typeof GET_POSTS,
   payload: TPost[]
