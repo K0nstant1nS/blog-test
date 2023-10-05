@@ -1,9 +1,5 @@
 import { FC } from 'react'
 import styles from './reaction.module.css'
-const likeImage = require('../../images/ThumbUpAlt.png')
-const likeImageActive = require('../../images/ThumbUpAltActive.png')
-const dislikeImage = require('../../images/ThumbDownAlt.png')
-const dislikeImageActive = require('../../images/ThumbDownAltActive.png')
 
 type TReactionProps = {
   type: 'like' | 'dislike',
@@ -14,10 +10,10 @@ type TReactionProps = {
 
 const Reaction: FC<TReactionProps> = ({type, num, isActive, onClick}) => {
   const images = {
-    'like': likeImage,
-    'dislike': dislikeImage,
-    'like-active': likeImageActive,
-    'dislike-active': dislikeImageActive
+    'like': `${process.env.PUBLIC_URL}/images/ThumbUpAlt.svg`,
+    'dislike': `${process.env.PUBLIC_URL}/images/ThumbDownAlt.svg`, 
+    'like-active': `${process.env.PUBLIC_URL}/images/ThumbUpAltActive.svg`,
+    'dislike-active': `${process.env.PUBLIC_URL}/images/ThumbDownAltActive.svg`
   }
   const image =  isActive ? images[`${type}-active`] : images[type];
   return ( <div className={styles.set}>

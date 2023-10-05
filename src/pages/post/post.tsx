@@ -2,30 +2,33 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './post.module.css'
 import { useDispatch, useSelector } from '../../services/hooks';
-import { getPostsSelector } from '../../utils';
+import { configurePost, getPostsSelector } from '../../utils';
 import { TPost } from '../../utils/types';
 import ReactionsSet from '../../components/reactions-set/reactions-set';
-import { TOGGLE_DISLIKE, TOGGLE_LIKE } from '../../services/actions/posts';
+import { TOGGLE_DISLIKE, TOGGLE_LIKE, getPost } from '../../services/actions/posts';
 import ErrorPage from '../error/error';
-const backImage = require('../../images/back.png')
+import Loader from '../../components/loader/loader';
 
 function Post() {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data } = useSelector(getPostsSelector);
-  const post = data.find((item: TPost) => {
-    return item.id == id
-  })
+  const { activePost, rating } = useSelector(getPostsSelector);
 
   useEffect(()=>{
-    window.scrollTo(0, 0)
+    dispatch(getPost(id))
   }, [])
 
-  if(!post){
+  if(activePost.status === 'error' || activePost.status === null){
     return <ErrorPage />
   }
+
+  if(activePost.status === 'load'){
+    return <Loader />
+  }
+
+  const post = configurePost(activePost.post, rating)
 
   const imgSrc = `https://placehold.co/600x400?text=${post.title}`
 
@@ -49,7 +52,7 @@ function Post() {
 
   return ( <div className = {styles.content}>
     <div className={styles.header}>
-      <button onClick={returnToMain} className={styles.backButton}><img src={backImage}/><span>Вернуться к статьям</span></button>
+      <button onClick={returnToMain} className={styles.backButton}><img src={`${process.env.PUBLIC_URL}/images/back.svg`}/><span>Вернуться к статьям</span></button>
       <ReactionsSet likes={post.likes} dislikes={post.dislikes} toggleDislike={toggleDislike} toggleLike={toggleLike} reaction={post.reaction}/>
     </div>
     <div className={styles.post}>

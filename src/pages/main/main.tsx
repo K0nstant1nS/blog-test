@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from "../../services/hooks"
 import styles from "./main.module.css"
 import {ReactElement, useEffect} from 'react'
 import { getPosts } from "../../services/actions/posts";
-import { getPostsSelector } from "../../utils";
+import { configurePost, getPostsSelector } from "../../utils";
 import Button from "../../components/button/button";
 import { TPost } from "../../utils/types";
 import Post from "../../components/post/post";
 import SearchInput from "../../components/search-input/search-input";
 
 const Main = () => {
-  const { data } = useSelector(getPostsSelector)
+  const { data, rating } = useSelector(getPostsSelector)
 
   let mainPost: ReactElement | null = null
   const firstColumn: ReactElement[] = [];
@@ -17,11 +17,11 @@ const Main = () => {
 
   data.forEach((post: TPost, index:number) => {
     if(index === 0){
-      mainPost = <Post {...post} size="big"/>
+      mainPost = <Post {...configurePost(post, rating)} size="big"/>
     } else if(index%2){
-      secondColumn.push(<Post key={post.id} {...post}></Post>)
+      secondColumn.push(<Post key={post.id} {...configurePost(post, rating)}></Post>)
     } else 
-      firstColumn.push(<Post key={post.id} {...post}></Post>)
+      firstColumn.push(<Post key={post.id} {...configurePost(post, rating)}></Post>)
   });
 
   return ( <div className={styles.container}>
