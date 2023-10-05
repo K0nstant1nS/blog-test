@@ -7,17 +7,21 @@ const searchImage = require('../../images/ic_search.png')
 
 
 const SearchInput = () => {
-  const [value, setValue] = useState('Поиск по названию статьи');
+  const [value, setValue] = useState('');
   const dispatch = useDispatch()
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
     dispatch(getPostsByQuery(configureQuery(value)))
   }
+
+  const onClick = () => {
+    dispatch(getPostsByQuery(configureQuery(value)))
+  }
   
   return ( <form className={styles.form} onSubmit={onSubmit}>
-    <img className={styles.image} src={searchImage}/>
-    <input value={value} onChange={(e)=>setValue(e.target.value)} className={styles.input}/>
+    <img onClick={onClick} className={styles.image} src={searchImage}/>
+    <input placeholder='Поиск по названию статьи' value={value} onChange={(e)=>setValue(e.target.value)} className={styles.input}/>
   </form> );
 }
 
