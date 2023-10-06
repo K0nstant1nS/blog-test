@@ -21,7 +21,7 @@ const SearchInput = () => {
     dispatchDebouncer()
   }
   return ( <form className={styles.form} onSubmit={onSubmit}>
-    <img onClick={onClick} className={styles.image} src={`${process.env.PUBLIC_URL}/images/ic_search.svg`}/>
+    <img onClick={onClick} className={styles.image} src={`${process.env.PUBLIC_URL}/images/ic_search.svg`} alt='лупа'/>
     <input placeholder='Поиск по названию статьи' value={value} onChange={(e)=>setValue(e.target.value)} className={styles.input}/>
   </form> );
 }

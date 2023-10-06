@@ -16,8 +16,9 @@ const Reaction: FC<TReactionProps> = ({type, num, isActive, onClick}) => {
     'dislike-active': `${process.env.PUBLIC_URL}/images/ThumbDownAltActive.svg`
   }
   const image =  isActive ? images[`${type}-active`] : images[type];
+  const alt = type === 'like' ? 'лайк' : 'дизлайк';
   return ( <div className={styles.set}>
-    <img onClick={onClick} className={styles.image} src={image}></img>
+    <img onClick={onClick} className={styles.image} src={image} alt={alt}></img>
     <p className={styles.counter}>{num}</p>
   </div> );
 }

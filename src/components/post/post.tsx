@@ -3,7 +3,6 @@ import styles from './post.module.css'
 import Reaction from '../reaction/reaction'
 import Button from '../button/button'
 import { useDispatch } from '../../services/hooks'
-import { TOGGLE_LIKE } from '../../services/actions/posts'
 import { useNavigate } from 'react-router-dom'
 import ReactionsSet from '../reactions-set/reactions-set'
 import { postsActions } from '../../services/reducers/posts'
@@ -38,7 +37,7 @@ const Post: FC<TPostProps> = ({id, title, body, likes, dislikes, reaction, size 
     switch(size){
       case 'small': {
         return ( <article className={styles.post}>
-          <img className={styles.image} src={imgSrc}/>
+          <img className={styles.image} src={imgSrc} alt='изображение поста'/>
           <h3 className={styles.title}>{title}</h3>
           <div className={styles.bottom}>
             <div className={styles.reaction}>
@@ -51,7 +50,7 @@ const Post: FC<TPostProps> = ({id, title, body, likes, dislikes, reaction, size 
       }
       case 'big': {
         return ( <article className={styles.post}>
-          <img className={styles.image} src={imgSrc}/>
+          <img className={styles.image} src={imgSrc} alt='изображение поста'/>
           <div className={styles.header}>
           <h3 className={styles.title}>{title}</h3>
             <ReactionsSet likes={likes} dislikes={dislikes} toggleDislike={toggleDislike} toggleLike={toggleLike} reaction={reaction}/>

@@ -1,9 +1,7 @@
-import { useDispatch, useSelector } from "../../services/hooks"
+import { useSelector } from "../../services/hooks"
 import styles from "./main.module.css"
-import {ReactElement, useEffect} from 'react'
-import { getPosts } from "../../services/actions/posts";
+import { ReactElement } from 'react'
 import { configurePost, getPostsSelector } from "../../utils";
-import Button from "../../components/button/button";
 import { TPost } from "../../utils/types";
 import Post from "../../components/post/post";
 import SearchInput from "../../components/search-input/search-input";

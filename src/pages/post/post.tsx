@@ -50,12 +50,12 @@ function Post() {
 
   return ( <div className = {styles.content}>
     <div className={styles.header}>
-      <button onClick={returnToMain} className={styles.backButton}><img src={`${process.env.PUBLIC_URL}/images/back.svg`}/><span>Вернуться к статьям</span></button>
+      <button onClick={returnToMain} className={styles.backButton}><img src={`${process.env.PUBLIC_URL}/images/back.svg`} alt='стрелка назад'/><span>Вернуться к статьям</span></button>
       <ReactionsSet likes={post.likes} dislikes={post.dislikes} toggleDislike={toggleDislike} toggleLike={toggleLike} reaction={post.reaction}/>
     </div>
     <div className={styles.post}>
       <h1 className={styles.title}>{post.title}</h1>
-      <img className={styles.image} src={imgSrc}/>
+      <img className={styles.image} src={imgSrc} alt='изображение поста'/>
       <p className={styles.body}>{post.body}</p>
     </div>
   </div> );
