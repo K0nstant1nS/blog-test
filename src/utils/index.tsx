@@ -1,5 +1,3 @@
-import Post from "../components/post/post"
-import { ReactElement } from 'react'
 import { TPost, TRating } from "./types"
 
 export const getRandom: (min:number, max: number)=>string = (min, max) => {

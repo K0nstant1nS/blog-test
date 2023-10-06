@@ -6,6 +6,7 @@ import { useDispatch } from '../../services/hooks'
 import { TOGGLE_LIKE } from '../../services/actions/posts'
 import { useNavigate } from 'react-router-dom'
 import ReactionsSet from '../reactions-set/reactions-set'
+import { postsActions } from '../../services/reducers/posts'
 
 type TPostProps = {
   id: string,
@@ -22,23 +23,11 @@ const Post: FC<TPostProps> = ({id, title, body, likes, dislikes, reaction, size 
   const navigate = useNavigate();
   const imgSrc = `https://placehold.co/600x400?text=${title}`
   const toggleDislike = () => {
-    dispatch({
-      type: TOGGLE_LIKE,
-      payload: {
-        id,
-        reaction: 'dislike'
-      }
-    })
+    dispatch(postsActions.toggleLike({id, reaction: 'dislike'}))
   }
 
   const toggleLike = () => {
-    dispatch({
-      type: TOGGLE_LIKE,
-      payload: {
-        id,
-        reaction: 'like'
-      }
-    })
+    dispatch(postsActions.toggleLike({id, reaction: 'like'}))
   }
 
   const navigateToPost = () => {

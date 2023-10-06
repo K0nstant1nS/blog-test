@@ -9,14 +9,23 @@ import { getPostsSelector } from './utils';
 import Loader from './components/loader/loader';
 import Error from './components/error/error';
 import ErrorPage from './pages/error/error';
+import { postsActions } from './services/reducers/posts';
+import { getRandom } from './utils';
 
 function App() {
   const dispatch = useDispatch()
   const posts = useSelector(getPostsSelector)
   useEffect(()=>{
-    dispatch(getPosts());
-    console.log(posts);
+    dispatch(getPosts(""))
   }, [dispatch])
+
+  useEffect(()=>{
+    dispatch(postsActions.setRating(posts.data.map((item:any) => {
+      return {id: item.id, likes: getRandom(0, 50), dislikes: getRandom(0, 50), reaction: null}
+    })))
+  }, [posts.status])
+
+
 
   const render = () => {
     switch(posts.status){

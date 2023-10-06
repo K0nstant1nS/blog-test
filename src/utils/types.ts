@@ -10,3 +10,10 @@ export type TRating = {
   dislikes: number,
   reaction: null|'like'|'dislike'
 }
+
+export interface IToggleLike {
+  payload: {
+    id: string,
+    reaction: 'like' | 'dislike'
+  }
+}

@@ -3,11 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './post.module.css'
 import { useDispatch, useSelector } from '../../services/hooks';
 import { configurePost, getPostsSelector } from '../../utils';
-import { TPost } from '../../utils/types';
 import ReactionsSet from '../../components/reactions-set/reactions-set';
-import { TOGGLE_LIKE, getPost } from '../../services/actions/posts';
+import { getPost } from '../../services/actions/posts';
 import ErrorPage from '../error/error';
 import Loader from '../../components/loader/loader';
+import { postsActions } from '../../services/reducers/posts';
 
 function Post() {
   
@@ -17,7 +17,7 @@ function Post() {
   const { activePost, rating } = useSelector(getPostsSelector);
 
   useEffect(()=>{
-    dispatch(getPost(id))
+    dispatch(getPost(id!))
   }, [])
 
   if(activePost.status === 'error' || activePost.status === null){
@@ -37,23 +37,11 @@ function Post() {
   const imgSrc = `https://placehold.co/600x400?text=${post.title}`
 
   const toggleDislike = () => {
-    dispatch({
-      type: TOGGLE_LIKE,
-      payload: {
-        id: post.id,
-        reaction: 'like'
-      }
-    })
+    dispatch(postsActions.toggleLike({id: post.id, reaction: 'dislike'}))
   }
 
   const toggleLike = () => {
-    dispatch({
-      type: TOGGLE_LIKE,
-      payload: {
-        id: post.id,
-        reaction: 'dislike'
-      }
-    })
+    dispatch(postsActions.toggleLike({id: post.id, reaction: 'like'}))
   }
 
   const returnToMain = () => {
