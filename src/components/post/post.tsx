@@ -3,7 +3,7 @@ import styles from './post.module.css'
 import Reaction from '../reaction/reaction'
 import Button from '../button/button'
 import { useDispatch } from '../../services/hooks'
-import { TOGGLE_DISLIKE, TOGGLE_LIKE } from '../../services/actions/posts'
+import { TOGGLE_LIKE } from '../../services/actions/posts'
 import { useNavigate } from 'react-router-dom'
 import ReactionsSet from '../reactions-set/reactions-set'
 
@@ -11,8 +11,8 @@ type TPostProps = {
   id: string,
   title: string,
   body: string,
-  likes: string,
-  dislikes: string,
+  likes: number,
+  dislikes: number,
   reaction: null|'like'|'dislike',
   size?: 'small' | 'big'
 }
@@ -23,15 +23,21 @@ const Post: FC<TPostProps> = ({id, title, body, likes, dislikes, reaction, size 
   const imgSrc = `https://placehold.co/600x400?text=${title}`
   const toggleDislike = () => {
     dispatch({
-      type: TOGGLE_DISLIKE,
-      payload: id
+      type: TOGGLE_LIKE,
+      payload: {
+        id,
+        reaction: 'dislike'
+      }
     })
   }
 
   const toggleLike = () => {
     dispatch({
       type: TOGGLE_LIKE,
-      payload: id
+      payload: {
+        id,
+        reaction: 'like'
+      }
     })
   }
 

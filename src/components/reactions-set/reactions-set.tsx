@@ -3,8 +3,8 @@ import styles from './reactions-set.module.css'
 import Reaction from '../reaction/reaction';
 
 type TReactionsSetProps = {
-  likes: string,
-  dislikes: string,
+  likes: number,
+  dislikes: number,
   toggleLike: () => void,
   toggleDislike: () => void
   reaction: 'like' | 'dislike' | null

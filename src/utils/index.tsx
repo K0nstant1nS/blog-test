@@ -12,10 +12,14 @@ export const configureQuery = (string: string) => {
   return string.replaceAll(' ', '+')
 }
 
-export const configurePost: (post: TPost, ratingData: TRating[])=>(TPost & TRating) = (post, ratingData) => {
+export const configurePost: (post: TPost, ratingData: TRating[])=>(TPost & TRating | null) = (post, ratingData) => {
   const rating = ratingData.find((item) => {
     return item.id === post.id
   })
+
+  if(!rating){
+    return null
+  }
   return {...post, ...rating}
 }
 

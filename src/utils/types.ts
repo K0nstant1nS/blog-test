@@ -1,15 +1,12 @@
 export type TPost = {
   id: string,
   title: string,
-  body: string,
-  likes: string,
-  dislikes: string,
-  reaction: null|'like'|'dislike'
+  body: string
 }
 
 export type TRating = {
   id: string,
-  likes: string,
-  dislikes: string,
+  likes: number,
+  dislikes: number,
   reaction: null|'like'|'dislike'
 }

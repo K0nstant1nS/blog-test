@@ -1,9 +1,10 @@
 import Api from "../../api"
+import { createAction } from "@reduxjs/toolkit"
 import { getRandom } from "../../utils"
 import { TPost, TRating } from "../../utils/types"
 import { AppDispatch, AppThunk } from "../types"
 
-export const GET_POSTS = 'GET_POSTS'
+/* export const GET_POSTS = 'GET_POSTS'
 export const SET_POSTS_ONLOAD = 'SET_POSTS_ONLOAD'
 export const SET_POSTS_ONERROR = 'SET_POSTS_ONERROR'
 
@@ -13,7 +14,18 @@ export const GET_POST_ONERROR = 'GET_POST_ONERROR'
 
 export const SET_RATING = 'SET_RATING'
 export const TOGGLE_LIKE = 'TOGGLE_LIKE'
-export const TOGGLE_DISLIKE = 'TOGGLE_DISLIKE'
+export const TOGGLE_DISLIKE = 'TOGGLE_DISLIKE' */
+
+export const GET_POSTS = createAction<TPost[], 'posts/GET_POSTS'>('posts/GET_POSTS');
+export const SET_POSTS_ONLOAD = createAction('posts/SET_POSTS_ONLOAD');
+export const SET_POSTS_ONERROR = createAction('posts/SET_POSTS_ONERROR');
+
+export const GET_POST = createAction<TPost, 'posts/GET_POST'>('posts/GET_POST');
+export const GET_POST_ONLOAD = createAction('posts/GET_POST_ONLOAD');
+export const GET_POST_ONERROR = createAction('posts/GET_POST_ONERROR');
+
+export const SET_RATING = createAction<TRating[], 'posts/SET_RATING'>('posts/SET_RATING')
+export const TOGGLE_LIKE = createAction<{id: string, reaction: 'like'|'dislike'}, 'posts/TOGGLE_LIKE'>('posts/TOGGLE_LIKE')
 
 export const getPosts:AppThunk<void> = ()=>{
   return (dispatch: AppDispatch) => {
@@ -93,12 +105,10 @@ export interface IGetPost {
 
 export interface IToggleLike {
   type: typeof TOGGLE_LIKE,
-  payload: string
-}
-
-export interface IToggleDislike {
-  type: typeof TOGGLE_DISLIKE,
-  payload: string
+  payload: {
+    id: string,
+    reaction: 'like' | 'dislike'
+  }
 }
 
 export interface IGetPostOnload {
@@ -109,4 +119,4 @@ export interface IGetPostOnerror {
   type: typeof GET_POST_ONERROR
 }
 
-export type TPostsActions = IGetPost | IGetPosts | IToggleLike | IToggleDislike | ISetPostsOnload | ISetPostsOnerror | ISetRating | IGetPostOnload | IGetPostOnerror
+export type TPostsActions = IGetPost | IGetPosts | IToggleLike | ISetPostsOnload | ISetPostsOnerror | ISetRating | IGetPostOnload | IGetPostOnerror

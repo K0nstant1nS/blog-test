@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from '../../services/hooks';
 import { configurePost, getPostsSelector } from '../../utils';
 import { TPost } from '../../utils/types';
 import ReactionsSet from '../../components/reactions-set/reactions-set';
-import { TOGGLE_DISLIKE, TOGGLE_LIKE, getPost } from '../../services/actions/posts';
+import { TOGGLE_LIKE, getPost } from '../../services/actions/posts';
 import ErrorPage from '../error/error';
 import Loader from '../../components/loader/loader';
 
@@ -30,19 +30,29 @@ function Post() {
 
   const post = configurePost(activePost.post, rating)
 
+  if(!post){
+    return <ErrorPage /> 
+  }
+
   const imgSrc = `https://placehold.co/600x400?text=${post.title}`
 
   const toggleDislike = () => {
     dispatch({
-      type: TOGGLE_DISLIKE,
-      payload: post.id
+      type: TOGGLE_LIKE,
+      payload: {
+        id: post.id,
+        reaction: 'like'
+      }
     })
   }
 
   const toggleLike = () => {
     dispatch({
       type: TOGGLE_LIKE,
-      payload: post.id
+      payload: {
+        id: post.id,
+        reaction: 'dislike'
+      }
     })
   }
 

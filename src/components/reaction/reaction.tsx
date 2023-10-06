@@ -3,7 +3,7 @@ import styles from './reaction.module.css'
 
 type TReactionProps = {
   type: 'like' | 'dislike',
-  num: string,
+  num: number,
   isActive: boolean,
   onClick: () => void
 }

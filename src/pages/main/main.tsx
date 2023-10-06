@@ -16,12 +16,16 @@ const Main = () => {
   const secondColumn: ReactElement[] = [];
 
   data.forEach((post: TPost, index:number) => {
+    const newPost = configurePost(post, rating);
+    if(!newPost){
+      return null
+    }
     if(index === 0){
-      mainPost = <Post {...configurePost(post, rating)} size="big"/>
+      mainPost = <Post {...newPost} size="big"/>
     } else if(index%2){
-      secondColumn.push(<Post key={post.id} {...configurePost(post, rating)}></Post>)
+      secondColumn.push(<Post key={post.id} {...newPost}></Post>)
     } else 
-      firstColumn.push(<Post key={post.id} {...configurePost(post, rating)}></Post>)
+      firstColumn.push(<Post key={post.id} {...newPost}></Post>)
   });
 
   return ( <div className={styles.container}>

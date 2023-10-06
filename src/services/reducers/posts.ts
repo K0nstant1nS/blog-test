@@ -1,6 +1,8 @@
 import { Reducer } from 'redux'
 import { TPost, TRating } from '../../utils/types'
-import { GET_POST, GET_POSTS, GET_POST_ONERROR, GET_POST_ONLOAD, SET_POSTS_ONERROR, SET_POSTS_ONLOAD, SET_RATING, TOGGLE_DISLIKE, TOGGLE_LIKE, TPostsActions } from '../actions/posts'
+import { GET_POST, GET_POSTS, GET_POST_ONERROR, GET_POST_ONLOAD, SET_POSTS_ONERROR, SET_POSTS_ONLOAD, SET_RATING, TOGGLE_LIKE, TPostsActions } from '../actions/posts'
+import { createReducer } from '@reduxjs/toolkit'
+import { ReducerWithInitialState } from '@reduxjs/toolkit/dist/createReducer'
 
 export type TPostsState = {
   data: TPost[],
@@ -12,7 +14,7 @@ export type TPostsState = {
   status: 'load' | 'success' | 'error' | null
 }
 
-const initialState = {
+const initialState:TPostsState = {
   data: [],
   rating: [],
   activePost: {
@@ -22,7 +24,53 @@ const initialState = {
   status: null
 } 
 
-export const postsReducer: Reducer<TPostsState, TPostsActions> = (state = initialState, action) => {
+export const postsReducer= createReducer(initialState, (builder) => {
+  builder.addCase(GET_POST, (state, action) => {
+    state.activePost = {
+      post: action.payload,
+      status: 'success'
+    }
+  })
+  .addCase(GET_POST_ONLOAD, (state, action) => {
+    state.activePost.status = 'load'
+  })
+  .addCase(GET_POST_ONERROR, (state, action) => {
+    state.activePost.status = 'error'
+  })
+  .addCase(GET_POSTS, (state, action) => {
+    state.data = action.payload
+    state.status = 'success'
+  })
+  .addCase(SET_POSTS_ONLOAD, (state, action) => {
+    state.status  = 'load'
+  })
+  .addCase(SET_POSTS_ONERROR, (state, action) => {
+    state.status = 'error'
+  })
+  .addCase(SET_RATING, (state, action) => {
+    state.rating = action.payload
+  })
+  .addCase(TOGGLE_LIKE, (state, action) => {
+    state.rating = state.rating.map((item) => {
+      if(item.id === action.payload.id){
+        if(item.reaction === null){
+          item[`${action.payload.reaction}s`]++
+          item.reaction = action.payload.reaction
+        } else if(item.reaction === action.payload.reaction){
+          item[`${action.payload.reaction}s`]--
+          item.reaction = null
+        } else if(item.reaction !== action.payload.reaction){
+          item[`${action.payload.reaction}s`]++
+          item[`${item.reaction}s`]--
+          item.reaction = action.payload.reaction
+        }
+      }
+      return item
+    })
+  })
+})
+
+/* export const postsReducer: Reducer<TPostsState, TPostsActions> = (state = initialState, action) => {
   switch(action.type) {
     case GET_POST: {
       return {...state, activePost: { post: action.payload, status: 'success' }}
@@ -89,4 +137,4 @@ export const postsReducer: Reducer<TPostsState, TPostsActions> = (state = initia
       return state
     }
   }
-}
+} */
