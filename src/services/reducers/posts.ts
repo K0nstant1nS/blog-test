@@ -56,7 +56,7 @@ export const postsSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(getPost.pending, (state, action) => {
+    builder.addCase(getPost.pending, (state) => {
       state.activePost.status = 'load'
     })
     .addCase(getPost.fulfilled, (state, action) => {
@@ -65,17 +65,20 @@ export const postsSlice = createSlice({
         status: 'success'
       }
     })
-    .addCase(getPost.rejected, (state, action) => {
+    .addCase(getPost.rejected, (state) => {
       state.activePost.status = 'error'
     })
-    .addCase(getPosts.pending, (state, action) => {
+    .addCase(getPosts.pending, (state) => {
+      if(state.status === 'success'){
+        return
+      }
       state.status = 'load'
     })
     .addCase(getPosts.fulfilled, (state, action) => {
       state.data = action.payload
       state.status = "success"
     })
-    .addCase(getPosts.rejected, (state, action) => {
+    .addCase(getPosts.rejected, (state) => {
       state.status = 'error'
     })
   }
