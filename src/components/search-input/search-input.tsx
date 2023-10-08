@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react'
+import React, { useState, FormEvent } from 'react'
 import styles from './search-input.module.css'
 import { getPosts } from '../../services/actions/posts';
 import { useDispatch } from '../../services/hooks';

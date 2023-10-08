@@ -11,6 +11,7 @@ import Error from './components/error/error';
 import ErrorPage from './pages/error/error';
 import { postsActions } from './services/reducers/posts';
 import { getRandom } from './utils';
+import { TPost } from './utils/types';
 
 function App() {
   const dispatch = useDispatch()
@@ -20,7 +21,7 @@ function App() {
   }, [dispatch])
 
   useEffect(()=>{
-    dispatch(postsActions.setRating(posts.data.map((item:any) => {
+    dispatch(postsActions.setRating(posts.data.map((item: TPost) => {
       return {id: item.id, likes: getRandom(0, 50), dislikes: getRandom(0, 50), reaction: null}
     })))
   }, [posts.status])

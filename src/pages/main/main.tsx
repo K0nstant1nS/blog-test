@@ -1,6 +1,6 @@
 import { useSelector } from "../../services/hooks"
 import styles from "./main.module.css"
-import { ReactElement } from 'react'
+import React,  { ReactElement } from 'react'
 import { configurePost, getPostsSelector } from "../../utils";
 import { TPost } from "../../utils/types";
 import Post from "../../components/post/post";

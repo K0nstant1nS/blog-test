@@ -15,7 +15,7 @@ export const TOGGLE_LIKE = createAction<{id: string, reaction: 'like'|'dislike'}
 
 export const getPosts = createAsyncThunk(
   'posts/getPosts',
-  async (query:string = '', thunkAPI) => {
+  async (query:string = '') => {
     const data = await Api.getPosts(query)
     return data
   }
@@ -23,7 +23,7 @@ export const getPosts = createAsyncThunk(
 
 export const getPost = createAsyncThunk(
   'posts/getPost',
-  async (id: string, thunkAPI) => {
+  async (id: string) => {
     const data = await Api.getPost(id);
     return data
   }

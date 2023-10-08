@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import styles from './reactions-set.module.css'
 import Reaction from '../reaction/reaction';
 

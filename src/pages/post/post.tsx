@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './post.module.css'
 import { useDispatch, useSelector } from '../../services/hooks';
@@ -28,7 +28,7 @@ function Post() {
     return <Loader />
   }
 
-  const post = configurePost(activePost.post, rating)
+  const post = configurePost(activePost.post!, rating)
 
   if(!post){
     return <ErrorPage /> 
