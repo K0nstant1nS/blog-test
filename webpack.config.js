@@ -23,6 +23,17 @@ module.exports = {
         use: 'ts-loader',
       },
       {
+        test: /\.(jpe?g|gif|png|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000
+            }
+          }
+        ]
+      },
+      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
@@ -42,7 +53,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
-      'process.env.PUBLIC_URL': JSON.stringify('http://localhost:3000/public')
+      'process.env.PUBLIC_URL': JSON.stringify('./public')
   })
   ],
 };
