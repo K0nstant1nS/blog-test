@@ -23,17 +23,6 @@ module.exports = {
         use: 'ts-loader',
       },
       {
-        test: /\.(jpe?g|gif|png|svg)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000
-            }
-          }
-        ]
-      },
-      {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
